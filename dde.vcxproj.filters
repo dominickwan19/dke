@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="graphics">
+      <UniqueIdentifier>{a1414ed2-8be9-4ee7-9a6d-859da5001d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\include">
+      <UniqueIdentifier>{d57f0b78-6d90-4a16-b822-51cf01ec4cf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\source">
+      <UniqueIdentifier>{9f6e0b3a-0478-4417-9396-d8f294cb978f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\include\base">
+      <UniqueIdentifier>{3b70e262-b15f-4ac9-93de-62b312b46cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\include\core">
+      <UniqueIdentifier>{fb239f97-c993-4ab3-a8dd-4cb055d7a35b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\include\data">
+      <UniqueIdentifier>{6856f352-82a3-453d-92a7-182f0e148078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty">
+      <UniqueIdentifier>{2214a44d-04e7-485f-8a9a-89836cd05e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\glm">
+      <UniqueIdentifier>{4b63dbbb-d6df-43d8-b0e0-1fa763fdbab0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\source\base">
+      <UniqueIdentifier>{3e44fa73-57c2-4b78-be58-40116411f97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="thirdparty\stb">
+      <UniqueIdentifier>{92d2630c-8b3b-49d7-ad3c-c0ee8ea12461}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app">
+      <UniqueIdentifier>{c86129be-550c-45ec-91bd-d8872a9f31c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app\include">
+      <UniqueIdentifier>{bd83206a-223a-4022-94c2-cf1b15020b61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="app\source">
+      <UniqueIdentifier>{d498fdf5-1500-4140-9de7-028c77a9544a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics_gl">
+      <UniqueIdentifier>{502b6d74-3ebd-490a-9c9c-36e51742bb1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\source\core">
+      <UniqueIdentifier>{eb827047-aedc-4a3d-8918-c5ef0d955720}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\source\data">
+      <UniqueIdentifier>{dfd21fa9-8e51-4ddc-b381-e6b5fee5fc04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics_gl\include">
+      <UniqueIdentifier>{bcab16e3-c5ed-42d2-b698-f3df8d289137}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics_gl\source">
+      <UniqueIdentifier>{a1d740bc-39eb-42b9-880e-43489ccd6b65}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\graphics\Buffer.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\UniformBuffer.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\GeometryBuffer.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\framegraph\Resource.h">
+      <Filter>graphics\include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Renderable.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderableKeyGenerator.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\framegraph\RenderPass.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderOptions.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderManager.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderCommand.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderQueue.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderStates.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\RenderTarget.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\CRenderableFactory.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\IFramebufferObject.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\IRenderableFactory.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\IRenderParameters.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Geometry.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\GeometryAttribute.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\GeometryManager.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\StateManager.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\ITextureObject.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Material.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\MaterialManager.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Shader.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\ShaderManager.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Texture.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\framegraph\Framegraph.h">
+      <Filter>graphics\include\core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Colour.h">
+      <Filter>graphics\include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Image.h">
+      <Filter>graphics\include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\stb\stb_image.h">
+      <Filter>thirdparty\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app\AppController.h">
+      <Filter>app\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app\DKEViewerApp.h">
+      <Filter>app\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLRenderManager.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app\DKEViewerAppController.h">
+      <Filter>app\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GeometryPass.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLTextureObject.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\Camera.h">
+      <Filter>graphics\include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLBuffer.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLGeometryBufferCreator.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\ScreenQuadGeometry.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\ScreenQuadGeometryBuffer.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLShader.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLShaderCreator.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\DynamicObj.h">
+      <Filter>graphics\include\base</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLRenderable.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLRenderCommand.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLRenderCommandGenerator.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app\DKEViewerRenderManager.h">
+      <Filter>app\include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\graphics\Image.cpp">
+      <Filter>graphics\source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\AppController.cpp">
+      <Filter>app\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\DKEViewerApp.cpp">
+      <Filter>app\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Renderable.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\RenderCommand.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\RenderManager.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\framegraph\Framegraph.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\RenderQueue.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\StateManager.cpp">
+      <Filter>graphics\source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Buffer.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Geometry.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\GeometryBuffer.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\GeometryManager.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Material.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\MaterialManager.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Shader.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\ShaderManager.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\UniformBuffer.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLRenderManager.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\DKEViewerAppController.cpp">
+      <Filter>app\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GeometryPass.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLTextureObject.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLBuffer.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\ScreenQuadGeometry.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLGeometryBufferCreator.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\ScreenQuadGeometryBuffer.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLShader.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLShaderCreator.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\DynamicObj.cpp">
+      <Filter>graphics\source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLRenderable.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLRenderCommand.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLRenderCommandGenerator.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\DKEViewerRenderManager.cpp">
+      <Filter>app\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\Camera.cpp">
+      <Filter>graphics\source\base</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
