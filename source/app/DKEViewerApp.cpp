@@ -1,4 +1,5 @@
 #include <app/DKEViewerApp.h>
+#include <app/DKEViewerRenderManager.h>
 #include <graphics_gl/GLRenderManager.h>
 #include <functional>
 #include <iostream>
@@ -11,7 +12,7 @@ DKEViewerApp* DKEViewerApp::m_instance = nullptr;
 
 DKEViewerApp::DKEViewerApp()
     : m_window(nullptr)
-    , m_appController(new dke::graphics_gl::GLRenderManager)
+    , m_appController(new dke::DKEViewerRenderManager)
 {
 }
 
