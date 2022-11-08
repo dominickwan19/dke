@@ -1,7 +1,8 @@
 //-------------------------------------------------------------------------------------------------
 #include <graphics_gl/GLGeometryBufferCreator.h>
 //-------------------------------------------------------------------------------------------------
-#include <graphics_gl/ScreenQuadGeometryBuffer.h>
+#include <graphics/geometry/MeshGeometryBuffer.h>
+#include <graphics/geometry/ScreenQuadGeometryBuffer.h>
 #include <GL/glew.h>
 //#include <ex_rendering_platform.h>
 //#include <graphics/RenderManager.h>
@@ -48,13 +49,13 @@ GeometryBuffer* GLGeometryBufferCreator::createBuffer(uint32_t geometryType, uin
     //    return lineStripBuffer;
     //}
 
-    //if (geometryType == GL_TRIANGLES && gfd.numAttributes > 1) {
-    //    WDEMeshGeometryBuffer* meshBuffer = new WDEMeshGeometryBuffer(gfd, flags, bufferSize);
-    //    meshBuffer->setCreateBufferFunction(createGLBuffer);
-    //    meshBuffer->create();
-    //    meshBuffer->cache();
-    //    return meshBuffer;
-    //}
+    if (geometryType == GL_TRIANGLES && gfd.numAttributes > 1) {
+        MeshGeometryBuffer* meshBuffer = new MeshGeometryBuffer(gfd, flags, bufferSize);
+        meshBuffer->setCreateBufferFunction(createGLBuffer);
+        meshBuffer->create();
+        meshBuffer->cache();
+        return meshBuffer;
+    }
 
     if (geometryType == GL_TRIANGLES && gfd.numAttributes == 1) {
         // perhaps should default a buffer implementation to store some standard stuff

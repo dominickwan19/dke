@@ -6,6 +6,7 @@
 #include <graphics/Renderable.h>
 #include <graphics/RenderableKeyGenerator.h>
 #include <graphics/Buffer.h>
+#include <graphics/IFramebufferObject.h>
 //-------------------------------------------------------------------------------------------------
 #include <glm/glm.hpp>
 //-------------------------------------------------------------------------------------------------
@@ -22,7 +23,8 @@ public:
     void cacheGeometries() override;
     void reset() override;
 
-    void initRenderPasses();
+    graphics::IFramebufferObject* getFBO();
+    graphics::IFramebufferObject* createFBO();
 
     uint64_t lastFrameTime();
     uint64_t lastUpdateTimestamp();
@@ -34,19 +36,7 @@ protected:
     void updateLastTimestamp();
 
 public:
-    //std::unique_ptr<graphics::IFramebufferObject> m_fbo;
-    
-
-    /*glm::mat4 m_cameraProjMat;
-    glm::mat4 m_cameraViewMat;
-
-    glm::mat4 m_prevTransformMat;
-    glm::mat4 m_currTransformMat;
-
-    bool m_doAntialias;
-    uint32_t ubo_handle;
-
-    std::vector<glm::vec2> jitterVals;*/
+    std::unique_ptr<graphics::IFramebufferObject> m_fbo;
 
 private:
     uint64_t m_lastUpdateTimestamp;

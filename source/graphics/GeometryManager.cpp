@@ -148,10 +148,12 @@ int32_t GeometryManager::getGeometryBufferSize()
     // we should have a better way to find out the geometry buffer size for
     // a given type of geometry.
     int32_t geometryBufferSize = DEFAULT_BUFFER_SIZE; // default buffer size is 4mb. Perhaps we should let api users specify this too.
-    int32_t maxSize = m_renderManager->renderCapabilities().maxElementIndex * sizeof(float) * 3;
-    if (maxSize > std::numeric_limits<int32_t>::max())
-        maxSize = std::numeric_limits<int32_t>::max();
-    geometryBufferSize = std::min<int32_t>(maxSize, geometryBufferSize);
+    int64_t maxSize = m_renderManager->renderCapabilities().maxElementIndex * sizeof(float) * 3;
+    maxSize = std::max<int64_t>(0, maxSize);
+    if (maxSize > std::numeric_limits<int64_t>::max())
+        maxSize = std::numeric_limits<int64_t>::max();
+    geometryBufferSize = std::min<int64_t>(maxSize, geometryBufferSize);
+    assert(geometryBufferSize > 0);
     return geometryBufferSize;
 }
 

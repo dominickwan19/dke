@@ -7,6 +7,7 @@
 #include <graphics/framegraph/RenderPass.h>
 #include <graphics/framegraph/Resource.h>
 #include <graphics_gl/GLTextureObject.h>
+#include <glm/mat4x4.hpp> // glm::mat4
 //-------------------------------------------------------------------------------------------------
 #include <set>
 //-------------------------------------------------------------------------------------------------
@@ -14,12 +15,13 @@
 namespace dke {
 namespace graphics_gl {
     class GLRenderManager;
+    class GLTextureObject;
 }
 }
 
 //-------------------------------------------------------------------------------------------------
 namespace dke {
-    namespace graphics {
+namespace graphics {
 //-------------------------------------------------------------------------------------------------
 
 struct TextureDescription {
@@ -38,11 +40,19 @@ struct TextureDescription {
 //-------------------------------------------------------------------------------------------------
 
 template <>
-GLTextureObject* dke::graphics::realizeResource(TextureDescription& description);
+dke::graphics_gl::GLTextureObject* dke::graphics::realizeResource(TextureDescription& description);
 
 //-------------------------------------------------------------------------------------------------
 
-using Texture2DResource = dke::graphics::ResourceHandle<GLTextureObject, TextureDescription>;
+using Texture2DResource = dke::graphics::ResourceHandle<dke::graphics_gl::GLTextureObject, TextureDescription>;
+
+//-------------------------------------------------------------------------------------------------
+
+typedef struct ShaderBuiltInData {
+    glm::mat4 projMat;
+    glm::mat4 viewMat;
+    glm::mat4 normalMat;
+} ShaderBuiltInData;
 
 //-------------------------------------------------------------------------------------------------
 
@@ -51,10 +61,6 @@ struct GeometryPassData {
     Texture2DResource* outputColor[3];
     Texture2DResource* outputDepth;
 };
-
-//-------------------------------------------------------------------------------------------------
-
-typedef struct TEXShaderData TEXShaderData;
 
 //-------------------------------------------------------------------------------------------------
 

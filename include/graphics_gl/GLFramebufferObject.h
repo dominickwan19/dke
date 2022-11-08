@@ -2,11 +2,13 @@
 #ifndef GLFramebufferObject_h
 #define GLFramebufferObject_h
 //-------------------------------------------------------------------------------------------------
-#include <core/ex_core.h>
 #include <graphics/IFramebufferObject.h>
 //-------------------------------------------------------------------------------------------------
+namespace dke {
+namespace graphics_gl {
+//-------------------------------------------------------------------------------------------------
 
-class GLFramebufferObject : public exgraphics::IFramebufferObject {
+class GLFramebufferObject : public graphics::IFramebufferObject {
 public:
     GLFramebufferObject();
     virtual ~GLFramebufferObject();
@@ -14,7 +16,7 @@ public:
     virtual void create();
     virtual void destroy();
 
-    virtual uint32_t attach(std::vector<exgraphics::IFramebufferAttachable*>& colorBuffers, exgraphics::IFramebufferAttachable* depthBuffer, bool checkCompleteness = false);
+    virtual uint32_t attach(std::vector<graphics::IFramebufferAttachable*>& colorBuffers, graphics::IFramebufferAttachable* depthBuffer, bool checkCompleteness = false);
 
     virtual void bind();
     virtual void unbind();
@@ -27,5 +29,7 @@ private:
 };
 
 //-------------------------------------------------------------------------------------------------
-
+} // namespace graphics_gl
+} // namespace dke
+//-------------------------------------------------------------------------------------------------
 #endif // GLFramebufferObject_h

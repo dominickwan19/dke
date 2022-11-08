@@ -4,6 +4,9 @@
 
 using namespace dke::graphics;
 
+namespace dke {
+namespace graphics_gl {
+
 /*=============================================================================
    static functions
 =============================================================================*/
@@ -473,3 +476,6 @@ int32_t GLTextureObject::getAttachmentTarget()
 //
 //    return id;
 //}
+
+}
+}

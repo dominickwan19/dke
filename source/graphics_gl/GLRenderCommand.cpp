@@ -113,9 +113,7 @@ void GLRenderCommand::execute(const RenderManager* renderManager, Shader* shader
             if (!m_geometryBuffer)
                 return;
             auto gfd = m_geometryBuffer->getFormatDescription();
-            GLenum err = glGetError();
             glDrawArrays(dd->geometryType, geometryHandle().startPosition / (gfd.typeSizes[0] * gfd.componentSizes[0]), geometryHandle().dataCount / gfd.componentSizes[0]);
-            err = glGetError();
         } else {
             GeometryAttributeBase* pAttribute = geometry()->getAttribute(0);
             glDrawArrays(dd->geometryType, geometry()->bufferHandle().startPosition / pAttribute->getTypeSizeInBytes() / pAttribute->getNumComponents(), geometry()->getDataCount() / pAttribute->getNumComponents());

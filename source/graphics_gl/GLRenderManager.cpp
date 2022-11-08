@@ -2,15 +2,16 @@
 #include <graphics_gl/GLRenderManager.h>
 //-------------------------------------------------------------------------------------------------
 #include <chrono>
+#include <graphics/RenderCommand.h>
 #include <graphics/RenderableKeyGenerator.h>
 #include <graphics/framegraph/Framegraph.h>
-#include <graphics/RenderCommand.h>
-#include <graphics_gl/GeometryPass.h>
+#include <graphics/geometry/ScreenQuadGeometry.h>
 #include <graphics_gl/GLGeometryBufferCreator.h>
-#include <graphics_gl/GLShaderCreator.h>
-#include <graphics_gl/ScreenQuadGeometry.h>
-#include <graphics_gl/GLRenderable.h>
 #include <graphics_gl/GLRenderCommandGenerator.h>
+#include <graphics_gl/GLRenderable.h>
+#include <graphics_gl/GLShaderCreator.h>
+#include <graphics_gl/GeometryPass.h>
+#include <graphics_gl/GLFramebufferObject.h>
 //-------------------------------------------------------------------------------------------------
 namespace dke {
 namespace graphics_gl {
@@ -24,7 +25,7 @@ GLRenderManager::GLRenderManager()
     : RenderManager(new DefaultRenderableKeyGenerator())
     , m_lastUpdateTimestamp(0)
 {
-//    m_apTextureManager.reset(new GLTextureManager());
+    //    m_apTextureManager.reset(new GLTextureManager());
     setGeometryBufferCreator(new GLGeometryBufferCreator);
     setShaderCreator(new GLShaderCreator);
     //m_fbo = std::unique_ptr<IFramebufferObject>(createFBO());
@@ -42,18 +43,17 @@ GLRenderManager::~GLRenderManager()
 void GLRenderManager::initialize()
 {
     const GLubyte* versionStr = glGetString(GL_VERSION);
-    
 
     // get capabilities of this GL implementation.
     glGetIntegerv(GL_MAX_UNIFORM_BLOCK_SIZE, &m_caps.maxUniformBufferSize);
     glGetIntegerv(GL_MAX_VERTEX_UNIFORM_VECTORS, &m_caps.maxVertexUniformVectors);
     glGetIntegerv(GL_MAX_ELEMENTS_INDICES, &m_caps.maxElementIndices);
     glGetIntegerv(GL_MAX_ELEMENTS_VERTICES, &m_caps.maxElementVertices);
-    glGetIntegerv(GL_MAX_ELEMENT_INDEX, &m_caps.maxElementIndex);
+    glGetInteger64v(GL_MAX_ELEMENT_INDEX, &m_caps.maxElementIndex);
+    
 
+    m_fbo.reset(createFBO());
     onInitialize();
-
-    initRenderPasses();
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -71,29 +71,19 @@ void GLRenderManager::reset()
 
 //-------------------------------------------------------------------------------------------------
 
-void GLRenderManager::initRenderPasses()
+graphics::IFramebufferObject* GLRenderManager::getFBO()
 {
-    Framegraph& fg = framegraph();
-    auto tdType0 = TextureDescription(0);
-    auto tdType1 = TextureDescription(1);
-    fg.createResourceHandle<Texture2DResource>("normalMap", 0, tdType0);
-    fg.createResourceHandle<Texture2DResource>("materialMap", 0, tdType0);
-    fg.createResourceHandle<Texture2DResource>("surfaceColorMap", 0, tdType0);
-    fg.createResourceHandle<Texture2DResource>("depth", 1, tdType1);
-
-    addRenderPass(new GeometryPass(0, this));
-
-    compileFramegraph();
+    return m_fbo.get();
 }
 
 //-------------------------------------------------------------------------------------------------
 
-//IFramebufferObject* GLRenderManager::createFBO()
-//{
-//    GLFramebufferObject* fbo = new GLFramebufferObject();
-//    fbo->create();
-//    return fbo;
-//}
+IFramebufferObject* GLRenderManager::createFBO()
+{
+    GLFramebufferObject* fbo = new GLFramebufferObject();
+    fbo->create();
+    return fbo;
+}
 
 //-------------------------------------------------------------------------------------------------
 
@@ -105,7 +95,7 @@ void GLRenderManager::onUpdate()
         if (r->isUpdated(lastUpdateTimestamp())) {
             //CMarkupRenderable* buttonRenderable = dynamic_cast<CMarkupRenderable*>(r.get());
             //if (!buttonRenderable)
-                //continue;
+            //continue;
             Renderable* renderable = r.get();
 
             // check if geometry is updated
@@ -114,7 +104,7 @@ void GLRenderManager::onUpdate()
 
             bool hasUnMatchHandle = false;
 
-            // check geometry size against its supposed handle 
+            // check geometry size against its supposed handle
             for (int i = 0; i < geometries.size(); i++) {
                 bool matches = true;
                 if (renderable->numGeometryHandles() != geometries.size())
@@ -128,7 +118,7 @@ void GLRenderManager::onUpdate()
                     // gets updated, otherwise the geometry will be cached with
                     // invalid handle
                     if (matches)
-                        geometries[i]->setBufferHandle(h); 
+                        geometries[i]->setBufferHandle(h);
                 }
 
                 geometries[i]->setDirty(true);
@@ -145,7 +135,6 @@ void GLRenderManager::onUpdate()
                 if (!matches)
                     hasUnMatchHandle = true;
             }
-
 
             // check if render command needs to be updated
             if (renderable->getNumRenderCommands() != geometries.size()) {
@@ -175,8 +164,7 @@ void GLRenderManager::onUpdate()
                 // also place them in the "global" render commands list
                 std::vector<RenderCommand*>& renderCommands = m_renderCommands;
                 renderCommands.insert(renderCommands.end(), commands.begin(), commands.end());
-            }
-            else if (hasUnMatchHandle) {
+            } else if (hasUnMatchHandle) {
                 for (int i = 0; i < renderable->getNumRenderCommands(); i++) {
                     renderable->getRenderCommands()[i]->setGeometryHandle(renderable->getGeometryHandle(i));
                 }
@@ -195,13 +183,15 @@ void GLRenderManager::onRender()
 
 //-------------------------------------------------------------------------------------------------
 
-uint64_t GLRenderManager::lastFrameTime() {
+uint64_t GLRenderManager::lastFrameTime()
+{
     return m_lastUpdateTimestamp - m_lastLastUpdateTimestamp;
 }
 
 //-------------------------------------------------------------------------------------------------
 
-uint64_t GLRenderManager::lastUpdateTimestamp() {
+uint64_t GLRenderManager::lastUpdateTimestamp()
+{
     return m_lastUpdateTimestamp;
 }
 

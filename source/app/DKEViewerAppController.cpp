@@ -24,6 +24,10 @@ DKEViewerAppController::~DKEViewerAppController()
 
 void DKEViewerAppController::initialize()
 {
+	m_camera->makePerspectiveProjection(45.0f, 1024.0f / 768.0f, 0.01f, 100.0f);
+	glm::vec3 position(0.0f, 0.1f, 0.2f);
+	m_camera->setPosition(position);
+
 	m_renderManager->initialize();
 }
 

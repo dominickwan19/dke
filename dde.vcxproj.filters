@@ -23,17 +23,8 @@
     <Filter Include="graphics\include\data">
       <UniqueIdentifier>{6856f352-82a3-453d-92a7-182f0e148078}</UniqueIdentifier>
     </Filter>
-    <Filter Include="thirdparty">
-      <UniqueIdentifier>{2214a44d-04e7-485f-8a9a-89836cd05e40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="thirdparty\glm">
-      <UniqueIdentifier>{4b63dbbb-d6df-43d8-b0e0-1fa763fdbab0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="graphics\source\base">
       <UniqueIdentifier>{3e44fa73-57c2-4b78-be58-40116411f97b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="thirdparty\stb">
-      <UniqueIdentifier>{92d2630c-8b3b-49d7-ad3c-c0ee8ea12461}</UniqueIdentifier>
     </Filter>
     <Filter Include="app">
       <UniqueIdentifier>{c86129be-550c-45ec-91bd-d8872a9f31c0}</UniqueIdentifier>
@@ -58,6 +49,12 @@
     </Filter>
     <Filter Include="graphics_gl\source">
       <UniqueIdentifier>{a1d740bc-39eb-42b9-880e-43489ccd6b65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\source\geometry">
+      <UniqueIdentifier>{75f4c11b-75b8-4925-b9ba-741ca8daa027}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="graphics\include\geometry">
+      <UniqueIdentifier>{8b11c975-b55a-44e9-a744-dc3c1f3ff438}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +148,6 @@
     <ClInclude Include="include\graphics\Image.h">
       <Filter>graphics\include\base</Filter>
     </ClInclude>
-    <ClInclude Include="thirdparty\stb\stb_image.h">
-      <Filter>thirdparty\stb</Filter>
-    </ClInclude>
     <ClInclude Include="include\app\AppController.h">
       <Filter>app\include</Filter>
     </ClInclude>
@@ -181,12 +175,6 @@
     <ClInclude Include="include\graphics_gl\GLGeometryBufferCreator.h">
       <Filter>graphics_gl\include</Filter>
     </ClInclude>
-    <ClInclude Include="include\graphics_gl\ScreenQuadGeometry.h">
-      <Filter>graphics_gl\include</Filter>
-    </ClInclude>
-    <ClInclude Include="include\graphics_gl\ScreenQuadGeometryBuffer.h">
-      <Filter>graphics_gl\include</Filter>
-    </ClInclude>
     <ClInclude Include="include\graphics_gl\GLShader.h">
       <Filter>graphics_gl\include</Filter>
     </ClInclude>
@@ -206,6 +194,27 @@
       <Filter>graphics_gl\include</Filter>
     </ClInclude>
     <ClInclude Include="include\app\DKEViewerRenderManager.h">
+      <Filter>app\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\GeometryLoader.h">
+      <Filter>graphics\include\data</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\geometry\ScreenQuadGeometry.h">
+      <Filter>graphics\include\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\geometry\ScreenQuadGeometryBuffer.h">
+      <Filter>graphics\include\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\geometry\MeshGeometry.h">
+      <Filter>graphics\include\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\geometry\MeshGeometryBuffer.h">
+      <Filter>graphics\include\geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics_gl\GLFramebufferObject.h">
+      <Filter>graphics_gl\include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\app\SSAOPass.h">
       <Filter>app\include</Filter>
     </ClInclude>
   </ItemGroup>
@@ -282,13 +291,7 @@
     <ClCompile Include="source\graphics_gl\GLBuffer.cpp">
       <Filter>graphics_gl\source</Filter>
     </ClCompile>
-    <ClCompile Include="source\graphics_gl\ScreenQuadGeometry.cpp">
-      <Filter>graphics_gl\source</Filter>
-    </ClCompile>
     <ClCompile Include="source\graphics_gl\GLGeometryBufferCreator.cpp">
-      <Filter>graphics_gl\source</Filter>
-    </ClCompile>
-    <ClCompile Include="source\graphics_gl\ScreenQuadGeometryBuffer.cpp">
       <Filter>graphics_gl\source</Filter>
     </ClCompile>
     <ClCompile Include="source\graphics_gl\GLShader.cpp">
@@ -314,6 +317,27 @@
     </ClCompile>
     <ClCompile Include="source\graphics\Camera.cpp">
       <Filter>graphics\source\base</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\GeometryLoader.cpp">
+      <Filter>graphics\source\data</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\geometry\ScreenQuadGeometryBuffer.cpp">
+      <Filter>graphics\source\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\geometry\ScreenQuadGeometry.cpp">
+      <Filter>graphics\source\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\geometry\MeshGeometry.cpp">
+      <Filter>graphics\source\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics\geometry\MeshGeometryBuffer.cpp">
+      <Filter>graphics\source\geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="source\graphics_gl\GLFramebufferObject.cpp">
+      <Filter>graphics_gl\source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\app\SSAOPass.cpp">
+      <Filter>app\source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

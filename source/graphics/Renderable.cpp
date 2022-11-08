@@ -51,7 +51,7 @@ uint64_t Renderable::getKey()
 
 Renderable::CategoryType Renderable::category() const
 {
-    return (Renderable::CategoryType)m_attributes.sceneLayer;
+    return (Renderable::CategoryType)m_attributes.category;
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -84,8 +84,8 @@ void Renderable::setViewportId(int8_t id)
 
 //-------------------------------------------------------------------------------------------------
 
-int8_t Renderable::viewportId() const 
-{  
+int8_t Renderable::viewportId() const
+{
     return m_attributes.viewportId;
 }
 
@@ -115,7 +115,7 @@ int32_t Renderable::material() const
 void Renderable::setKeyStruct(CategoryType screenLayer, ComponentType component, EntityType entityType, TranslucencyType translucency)
 {
     m_attributes = {};
-    m_attributes.sceneLayer = screenLayer;
+    m_attributes.category = screenLayer;
     m_attributes.component = component;
     m_attributes.entity = entityType;
     m_attributes.translucency = translucency;
@@ -180,7 +180,8 @@ void Renderable::setVisible(bool bVisible)
 
 //-------------------------------------------------------------------------------------------------
 
-bool Renderable::isUpdated(uint64_t refTimestamp) {
+bool Renderable::isUpdated(uint64_t refTimestamp)
+{
     return isChangedSince(refTimestamp);
 }
 
@@ -247,7 +248,7 @@ void Renderable::invalidateGeometryHandles()
 void Renderable::clearGeometryData()
 {
     for (auto& g : m_geometries) {
-        if (g->flags() == GEOMETRY_FLAGS_STATIC) 
+        if (g->flags() == GEOMETRY_FLAGS_STATIC)
             g->clearData();
     }
 }

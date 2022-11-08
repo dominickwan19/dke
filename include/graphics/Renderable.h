@@ -61,12 +61,13 @@ enum TranslucencyType {
 class Renderable : public DynamicObj {
 public:
     enum CategoryType {
-
+        CATEGORY_GEOMETRY,
+        CATEGORY_SCREEN
     };
 
 public:
     struct Attributes {
-        int8_t sceneLayer;
+        int8_t category;
         int8_t component;
         int8_t entity;
         int8_t viewportId;
@@ -90,6 +91,7 @@ public:
     // that it can be used for binning effectively in the render pipeline.
     virtual uint64_t getKey();
 
+    void setCategory(CategoryType c) { m_attributes.category = c; }
     CategoryType category() const;
     ComponentType component() const;
     EntityType entityType() const;

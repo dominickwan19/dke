@@ -1,20 +1,23 @@
 //-------------------------------------------------------------------------------------------------
-#include <rendering/gles/GLFramebufferObject.h>
-//-------------------------------------------------------------------------------------------------
-#include <ex_rendering_platform.h>
+#include <graphics_gl/GLFramebufferObject.h>
 //-------------------------------------------------------------------------------------------------
 #include <assert.h>
-#include <stdio.h>
-#include <string.h>
+#include <gl/glew.h>
+//-------------------------------------------------------------------------------------------------
+using namespace dke::graphics;
+//-------------------------------------------------------------------------------------------------
+namespace dke {
+namespace graphics_gl {
 //-------------------------------------------------------------------------------------------------
 
-using namespace exgraphics;
-
-#define PRINT_GL_ERROR(msg) \
-    { GLenum err = glGetError(); if (err != GL_NO_ERROR) printf(msg, err); }
+#define PRINT_GL_ERROR(msg)        \
+{                              \
+    GLenum err = glGetError(); \
+    if (err != GL_NO_ERROR)    \
+        printf(msg, err);      \
+}
 
 //-------------------------------------------------------------------------------------------------
-
 GLFramebufferObject::GLFramebufferObject()
     : m_fboID(0)
 {
@@ -123,11 +126,13 @@ void GLFramebufferObject::blitToBuffer(uint32_t targetBufferID, uint32_t targetA
 
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, targetBufferID);
     PRINT_GL_ERROR("GLFramebufferObject::blitToBuffer error glBindFramebuffer 2: %d\n")
-    
+
     //glDrawBuffer(targetAttachment);
 
     glBlitFramebuffer(0, 0, 2048, 2048, 0, 0, 2048, 2048, GL_COLOR_BUFFER_BIT, GL_LINEAR);
     PRINT_GL_ERROR("GLFramebufferObject::blitToBuffer error glBlitFramebuffer: %d\n")
 }
-
+//-------------------------------------------------------------------------------------------------
+} // namespace graphics_gl
+} // namespace dke
 //-------------------------------------------------------------------------------------------------

@@ -41,7 +41,7 @@ public:
         int32_t maxVertexUniformVectors;
         int32_t maxElementIndices;
         int32_t maxElementVertices;
-        int32_t maxElementIndex;
+        int64_t maxElementIndex;
     };
 
     enum class TBackgroundStyle {
@@ -170,7 +170,6 @@ protected:
     std::unique_ptr<Framegraph> m_apFramegraph;
 
     std::vector<std::unique_ptr<Renderable>> m_renderables;
-    //std::set<Renderable*> m_permanentRenderables;
     std::vector<std::unique_ptr<Buffer>> m_dataBuffers; // uniform buffers
     std::vector<graphics::RenderCommand*> m_renderCommands;
 

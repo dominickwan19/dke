@@ -6,6 +6,7 @@
 #include <graphics/RenderableKeyGenerator.h>
 #include <graphics/StateManager.h>
 #include <graphics_gl/GLRenderManager.h>
+#include <graphics_gl/GLTextureObject.h>
 //-------------------------------------------------------------------------------------------------
 #include <bitset>
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
@@ -15,6 +16,7 @@
 #include <glm/vec4.hpp> // glm::vec4
 //-------------------------------------------------------------------------------------------------
 using namespace dke::graphics;
+using namespace dke::graphics_gl;
 //-------------------------------------------------------------------------------------------------
 
 namespace dke {
@@ -22,14 +24,13 @@ namespace graphics {
     template <>
     GLTextureObject* realizeResource(TextureDescription& description)
     {
-        // Problem: It ignores the description now
         GLTextureObject* tex = nullptr;
         if (description.type == 0)
             tex = GLTextureObject::createRGBA8(2048, 2048);
         else if (description.type == 1)
             tex = GLTextureObject::createDEPTH24_STENCIL8(2048, 2048);
 
-        return tex;
+        return tex; 
     }
 }
 }
@@ -37,16 +38,6 @@ namespace graphics {
 //-------------------------------------------------------------------------------------------------
 namespace dke {
 namespace graphics {
-//-------------------------------------------------------------------------------------------------
-
-typedef struct ShaderBuiltInData {
-    glm::mat4 projMat;
-    glm::mat4 viewMat;
-};
-
-//-------------------------------------------------------------------------------------------------
-
-
 //-------------------------------------------------------------------------------------------------
 
 GeometryPass::GeometryPass(int32_t index, RenderManager* renderManager)
@@ -84,27 +75,37 @@ void GeometryPass::clearBackground(const Colour4& colour)
 
 void GeometryPass::execute(const Camera* camera, const RenderOptions* renderOptions)
 {
-    clearBackground(renderOptions->backgroundColour);
-
     const GeometryPassData& data = this->data();
-    //int32_t currentIndex = currentFrame % 2;
-    //std::vector<IFramebufferAttachable*> colorBuffers;
-    //colorBuffers.push_back((GLTextureObject*)data.outputColor[0]->resource());
-    //colorBuffers.push_back((GLTextureObject*)data.outputColor[1]->resource());
-    //m_renderManager->m_fbo->attach(colorBuffers, (GLTextureObject*)data.outputDepth->resource());
-    //m_renderManager->m_fbo->bind();
 
+    std::vector<IFramebufferAttachable*> colorBuffers;
+    colorBuffers.push_back((GLTextureObject*)data.outputColor[0]->resource());
+    colorBuffers.push_back((GLTextureObject*)data.outputColor[1]->resource());
+    auto a = (GLTextureObject*)data.outputDepth->resource();
+    getGLRenderManager()->getFBO()->attach(colorBuffers, (GLTextureObject*)data.outputDepth->resource(), true);
+    getGLRenderManager()->getFBO()->bind();
+
+    // TODO: built this somewhere else, pass into render passes
     ShaderBuiltInData builtIn;
     builtIn.projMat = camera->projectionMatrix();
     builtIn.viewMat = camera->viewMatrix();
+    builtIn.normalMat = glm::inverse(glm::transpose(camera->viewMatrix()));
 
     int32_t currentShaderId = -1;
     Shader* currentShader = nullptr;
-    
+
+    glDisable(GL_CULL_FACE);
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LEQUAL);
+
+    clearBackground(renderOptions->backgroundColour);
+
     for (RenderCommand* rc : *getGLRenderManager()->getRenderQueue()) {
         if (rc->shaderId() == 0)
             continue;
         if (!rc->isActive())
+            continue;
+
+        if (rc->renderable()->category() != Renderable::CATEGORY_GEOMETRY)
             continue;
 
         if (currentShaderId != rc->shaderId()) {
@@ -121,6 +122,12 @@ void GeometryPass::execute(const Camera* camera, const RenderOptions* renderOpti
 
         rc->execute(m_renderManager, currentShader);
     }
+
+    getGLRenderManager()->getFBO()->unbind();
+
+    //glDepthMask(GL_TRUE);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //getGLRenderManager()->getFBO()->blitToBuffer(0, 0);
 }
 
 //-------------------------------------------------------------------------------------------------

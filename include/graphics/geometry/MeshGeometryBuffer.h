@@ -1,44 +1,29 @@
 //-------------------------------------------------------------------------------------------------
-#ifndef DKE_Graphics_Camera_h
-#define DKE_Graphics_Camera_h
+#ifndef MeshGeometryBuffer_h
+#define MeshGeometryBuffer_h
 //-------------------------------------------------------------------------------------------------
-#include <glm/vec3.hpp>
-#include <glm/mat4x4.hpp>
+#include <graphics/GeometryBuffer.h>
+//-------------------------------------------------------------------------------------------------
+
 //-------------------------------------------------------------------------------------------------
 namespace dke {
 namespace graphics {
 //-------------------------------------------------------------------------------------------------
 
-class Camera 
-{
+class MeshGeometryBuffer : public graphics::GeometryBuffer {
 public:
-	Camera();
-	~Camera();
+    MeshGeometryBuffer(const graphics::GeometryFormatDescription& gfd, uint32_t flags, size_t defaultSize);
 
-	void makePerspectiveProjection(float fov, float aspect, float n, float f);
-	void makeOrthogonalProjection(float l, float r, float t, float b, float n, float f);
-
-	void setPosition(glm::vec3& p);
-	void setRotation(glm::vec3& r);
-	const glm::vec3& position() const;
-	const glm::vec3& rotation() const;
-
-	const glm::mat4& projectionMatrix() const;
-	const glm::mat4& viewMatrix() const;
+    void cache() override;
+    bool bind(graphics::Geometry::GeometryBufferHandle* handle = nullptr) override;
 
 private:
-	void updateViewMatrix();
-
-private:
-	glm::vec3 m_position;
-	glm::vec3 m_rotation;
-
-	glm::mat4 m_projectionMatrix;
-	glm::mat4 m_viewMatrix;
+    uint64_t m_vaoId;
 };
 
 //-------------------------------------------------------------------------------------------------
 } // namespace graphics
 } // namespace dke
 //-------------------------------------------------------------------------------------------------
-#endif // DKE_Graphics_Camera_h
+
+#endif // MeshGeometryBuffer_h

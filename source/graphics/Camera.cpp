@@ -6,6 +6,19 @@ namespace dke {
 namespace graphics {
 //-------------------------------------------------------------------------------------------------
 
+Camera::Camera()
+	: m_position(glm::vec3(0.0))
+	, m_rotation(glm::vec3(0.0))
+	, m_projectionMatrix(glm::mat4(1.0))
+	, m_viewMatrix(glm::mat4(1.0))
+{
+	
+}
+
+Camera::~Camera()
+{
+}
+
 void Camera::setPosition(glm::vec3& p)
 {
 	m_position = p;
@@ -68,11 +81,11 @@ const glm::mat4& Camera::viewMatrix() const
 
 void Camera::updateViewMatrix()
 {
-	m_viewMatrix = glm::mat4();
-	glm::rotate(m_viewMatrix, -m_rotation.x, glm::vec3(1.0, 0.0, 0.0));
-	glm::rotate(m_viewMatrix, -m_rotation.y, glm::vec3(0.0, 1.0, 0.0));
-	glm::rotate(m_viewMatrix, -m_rotation.z, glm::vec3(0.0, 0.0, 1.0));
-	glm::translate(m_viewMatrix, -m_position);
+	m_viewMatrix = glm::mat4(1.0);
+	m_viewMatrix = glm::rotate(m_viewMatrix, -m_rotation.x, glm::vec3(1.0, 0.0, 0.0));
+	m_viewMatrix = glm::rotate(m_viewMatrix, -m_rotation.y, glm::vec3(0.0, 1.0, 0.0));
+	m_viewMatrix = glm::rotate(m_viewMatrix, -m_rotation.z, glm::vec3(0.0, 0.0, 1.0));
+	m_viewMatrix = glm::translate(m_viewMatrix, -m_position);
 }
 
 //-------------------------------------------------------------------------------------------------

@@ -7,7 +7,8 @@
 
 #include <graphics/MaterialManager.h>
 
-//TODO: use doxygen style comment
+namespace dke {
+namespace graphics_gl {
 
 class GLTextureObject : public dke::graphics::ITextureObject, public dke::graphics::IFramebufferAttachable {
 public:
@@ -93,5 +94,8 @@ private:
 //    virtual int32_t loadTexture(excore::CImgePtr imageData) override;
 //    virtual int32_t loadTexture(HEXImage hImage) override;
 //};
+
+}
+}
 
 #endif // GLTextureObject_h_
