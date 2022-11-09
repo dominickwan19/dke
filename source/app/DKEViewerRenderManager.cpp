@@ -38,14 +38,10 @@ void DKEViewerRenderManager::onInitialize()
     renderOptions()->backgroundColour = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
 
     std::string shaderBase = "shader/";
-    int32_t shaderId = 0;
-    int32_t shaderId2 = 0;
-    int32_t shaderId3 = 0;
-    int32_t shaderId4 = 0;
-    shaderId = m_shaderManager.create({ shaderBase + "screenHighlight.vert.glsl", shaderBase + "screenHighlight.frag.glsl" }, 0);
-    shaderId2 = m_shaderManager.create({ shaderBase + "geometry.vert.glsl", shaderBase + "geometry.frag.glsl" }, 1);
-    shaderId3 = m_shaderManager.create({ shaderBase + "ssao.vert.glsl", shaderBase + "ssao.frag.glsl" }, 2);
-    //shaderId4 = m_shaderManager.create({ shaderBase + "ssao.vert.glsl", shaderBase + "hbao.frag.glsl" }, 3);
+    m_shaderManager.create({ shaderBase + "screenHighlight.vert.glsl", shaderBase + "screenHighlight.frag.glsl" }, SHADER_SCREEN);
+    m_shaderManager.create({ shaderBase + "geometry.vert.glsl", shaderBase + "geometry.frag.glsl" }, SHADER_GEOMETRY);
+    m_shaderManager.create({ shaderBase + "ssao.vert.glsl", shaderBase + "ssao.frag.glsl" }, SHADER_SSAO);
+    m_shaderManager.create({ shaderBase + "ssao.vert.glsl", shaderBase + "hbao.frag.glsl" }, SHADER_HBAO);
 
     //loadMesh();
     GeometryLoader loader;
@@ -56,7 +52,7 @@ void DKEViewerRenderManager::onInitialize()
     for (auto g : geometries)
         renderable->addGeometry(g);
     renderable->setCategory(Renderable::CATEGORY_GEOMETRY);
-    renderable->setMaterial(shaderId2);
+    renderable->setMaterial(m_shaderManager.find(SHADER_GEOMETRY)->id());
     addRenderable(renderable);
 
     initRenderPasses();
@@ -68,7 +64,7 @@ void DKEViewerRenderManager::onInitialize()
 void DKEViewerRenderManager::initRenderPasses()
 {
     // create a screen quad for rendering screen-based passes
-    int shaderId = m_shaderManager.find(0)->id();
+    int shaderId = m_shaderManager.find(SHADER_SCREEN)->id();
     Renderable* renderable = new GLRenderable();
     ScreenQuadGeometry* screenQuad = new ScreenQuadGeometry;
     float quad[12] = { -1.0f, -1.0f, 1.0f, -1.0f, 1.0f, 1.0f, -1.0f, -1.0f, 1.0f, 1.0f, -1.0f, 1.0f };

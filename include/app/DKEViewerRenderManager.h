@@ -18,6 +18,14 @@ class GLTextureObject;
 namespace dke {
 //-------------------------------------------------------------------------------------------------
 
+
+enum ShaderEnum {
+    SHADER_SCREEN,
+    SHADER_GEOMETRY,
+    SHADER_SSAO,
+    SHADER_HBAO
+};
+
 class DKEViewerRenderManager : public dke::graphics_gl::GLRenderManager
 {
 public:

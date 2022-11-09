@@ -56,7 +56,7 @@ void SSAOPass::execute(const Camera* camera, const RenderOptions* renderOptions)
 
     int32_t currentShaderId = -1;
     Shader* currentShader = nullptr;
-    int32_t shaderId = m_renderManager->getShaderManager()->find(2)->id();
+    int32_t shaderId = m_renderManager->getShaderManager()->find(SHADER_HBAO)->id();
 
     // TODO: built this somewhere else, pass into render passes
     ShaderBuiltInData builtIn;
@@ -65,8 +65,6 @@ void SSAOPass::execute(const Camera* camera, const RenderOptions* renderOptions)
     builtIn.normalMat = glm::inverse(glm::transpose(camera->viewMatrix()));
 
     for (RenderCommand* rc : *getRenderManager()->getRenderQueue()) {
-        //if (rc->shaderId() == 0)
-        //    continue;
         if (!rc->isActive())
             continue;
 
