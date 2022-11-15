@@ -153,6 +153,10 @@ public:
 
     int32_t getGeometryBufferSize();
 
+    int getWindowWidth() { return m_windowWidth; }
+    int getWindowHeight() { return m_windowHeight; }
+    void onResize(int width, int height);
+
 protected:
     virtual void onInitialize();
     virtual void onUpdate();
@@ -180,6 +184,9 @@ protected:
 
     TBackgroundStyle m_backgroundStyle;
     const Camera* m_camera;
+
+    int m_windowWidth;
+    int m_windowHeight;
 };
 
 typedef std::shared_ptr<RenderManager> RenderManagerPtr;

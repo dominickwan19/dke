@@ -52,6 +52,7 @@ typedef struct ShaderBuiltInData {
     glm::mat4 projMat;
     glm::mat4 viewMat;
     glm::mat4 normalMat;
+    glm::vec4 viewportSize;
 } ShaderBuiltInData;
 
 //-------------------------------------------------------------------------------------------------

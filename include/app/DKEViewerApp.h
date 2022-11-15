@@ -27,6 +27,7 @@ public:
 	void keyCallback(GLFWwindow*, int key, int scancode, int action, int mods);
 	void mousePosCallback(GLFWwindow* window, double xpos, double ypos);
 	void mouseButtonCallback(GLFWwindow*, int button, int action, int mods);
+	void windowResizeCallback(GLFWwindow* window, int width, int height);
 	void errorCallback(int errorCode, const char* description);
 
 private:
@@ -36,6 +37,7 @@ private:
 	GLFWkeyfun m_keyCB;
 	GLFWcursorposfun m_cursorposCB;
 	GLFWmousebuttonfun m_mousebuttonCB;
+	GLFWframebuffersizefun m_windowsizeCB;
 
 	DKEViewerAppController m_appController;
 	int32_t m_mouseX, m_mouseY;

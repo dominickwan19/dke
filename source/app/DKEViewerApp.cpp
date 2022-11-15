@@ -69,6 +69,9 @@ void DKEViewerApp::registerCallbacks()
     glfwSetCursorPosCallback(m_window, m_cursorposCB);
     m_mousebuttonCB = [](GLFWwindow* window, int button, int action, int mods) { DKEViewerApp::instance()->mouseButtonCallback(window, button, action, mods); };
     glfwSetMouseButtonCallback(m_window, m_mousebuttonCB);
+    m_windowsizeCB = [](GLFWwindow* window, int width, int height) { DKEViewerApp::instance()->windowResizeCallback(window, width, height); };
+    glfwSetFramebufferSizeCallback(m_window, m_windowsizeCB);
+
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -85,6 +88,9 @@ void DKEViewerApp::initialize()
         glfwTerminate();
 
     registerCallbacks();
+
+    // on initialize resize event is not sent by default.
+    m_windowsizeCB(m_window, 1024, 768);
 
     glfwMakeContextCurrent(m_window);
     glfwSwapInterval(1);
@@ -188,6 +194,13 @@ void DKEViewerApp::mouseButtonCallback(GLFWwindow*, int button, int action, int 
             break;
         }
     }
+}
+
+//-------------------------------------------------------------------------------------------------
+
+void DKEViewerApp::windowResizeCallback(GLFWwindow* window, int width, int height)
+{
+    m_appController.onWindowResize(width, height);
 }
 
 //-------------------------------------------------------------------------------------------------

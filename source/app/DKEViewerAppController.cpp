@@ -106,5 +106,12 @@ void DKEViewerAppController::onMouseWheel(const MouseEventData&& eventData)
 }
 
 //-------------------------------------------------------------------------------------------------
+
+void DKEViewerAppController::onWindowResize(int width, int height)
+{
+	m_renderManager->onResize(width, height);
+}
+
+//-------------------------------------------------------------------------------------------------
 } // namespace dke
 //-------------------------------------------------------------------------------------------------

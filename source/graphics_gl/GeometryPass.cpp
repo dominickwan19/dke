@@ -89,6 +89,7 @@ void GeometryPass::execute(const Camera* camera, const RenderOptions* renderOpti
     builtIn.projMat = camera->projectionMatrix();
     builtIn.viewMat = camera->viewMatrix();
     builtIn.normalMat = glm::inverse(glm::transpose(camera->viewMatrix()));
+    builtIn.viewportSize = glm::vec4(getGLRenderManager()->getWindowWidth(), getGLRenderManager()->getWindowHeight(), 0.0f, 0.0f);
 
     int32_t currentShaderId = -1;
     Shader* currentShader = nullptr;

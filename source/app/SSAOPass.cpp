@@ -63,6 +63,7 @@ void SSAOPass::execute(const Camera* camera, const RenderOptions* renderOptions)
     builtIn.projMat = camera->projectionMatrix();
     builtIn.viewMat = camera->viewMatrix();
     builtIn.normalMat = glm::inverse(glm::transpose(camera->viewMatrix()));
+    builtIn.viewportSize = glm::vec4(m_renderManager->getWindowWidth(), m_renderManager->getWindowHeight(), 0.0f, 0.0f);
 
     for (RenderCommand* rc : *getRenderManager()->getRenderQueue()) {
         if (!rc->isActive())
@@ -96,6 +97,8 @@ void SSAOPass::execute(const Camera* camera, const RenderOptions* renderOptions)
         currentShader->setUniform("randomMap", 2);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+        currentShader->setUniform("sampleRadius", 0.03f);
 
         rc->execute(m_renderManager, currentShader);
 

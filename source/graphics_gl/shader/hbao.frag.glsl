@@ -8,11 +8,14 @@ uniform sampler2D normalMap;
 uniform sampler2D depthMap;
 uniform sampler2D randomMap;
 
+uniform float sampleRadius;
+
 layout(std140) uniform BuildIns
 {
     mat4 projMat;
     mat4 viewMat;
 	mat4 normalMat;
+	vec4 viewportSize;
 };
 
 out vec4 colour;
@@ -56,9 +59,10 @@ vec3 reconstructViewPosition(vec2 coord)
 }
 
 // image-based horizon AO, brute-force reference
-float hbao(vec3 Pv, vec3 Nv)
+float hbao(vec3 Pv, vec3 Nv, float radius)
 {
     float ao = 0.0;
+	float screenRadius = (projMat * vec4(radius, 0.0, 0.0, 1.0)).r * viewportSize.x; // to optimize
 	
 	vec4 randomFactors = texture(randomMap, gl_FragCoord.xy / vec2(16.0));
 	
@@ -70,7 +74,7 @@ float hbao(vec3 Pv, vec3 Nv)
 		float sampleDist = 0.0;
 		
 		for (float j = 1.0; j <= 4.0; j += 1.0) {
-			vec2 sampleCoord = gl_FragCoord.xy + sampleDir * 20.0 * j;
+			vec2 sampleCoord = gl_FragCoord.xy + sampleDir * screenRadius / j;
 			vec3 samplePv = reconstructViewPosition(sampleCoord);
 			float dist = length(samplePv - Pv);
 			vec3 elevationVec = samplePv - Pv;
@@ -81,7 +85,7 @@ float hbao(vec3 Pv, vec3 Nv)
 			horizonAngle = max(elevationAngle, horizonAngle);			
 		}
 		
-		float attenuation = 1.0 - clamp(0.0, 1.0,(sampleDist / 20.0) * (sampleDist / 20.0));
+		float attenuation = 1.0 - clamp(0.0, 1.0,(sampleDist / radius) * (sampleDist / radius));
 		ao += attenuation * (sin(horizonAngle) - sin(0.1));
 	}
 	ao /= 16.0;
@@ -95,7 +99,7 @@ void main(void)
 	vec3 Pv = reconstructViewPosition(gl_FragCoord.xy);
 	vec3 Nv = texture(normalMap, gl_FragCoord.xy / vec2(2048.0, 2048.0)).rgb * 2.0 - 1.0;
 
-	colour.rgb = vec3(hbao(Pv, Nv));
+	colour.rgb = vec3(hbao(Pv, Nv, sampleRadius));
 	
 	colour.a = 1.0;
 }

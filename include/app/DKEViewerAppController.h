@@ -39,6 +39,8 @@ public:
     void onMouseMove(const MouseEventData&& eventData) override;
     void onMouseWheel(const MouseEventData&& eventData) override; 
 
+    void onWindowResize(int width, int height) override;
+
 private:
     std::unique_ptr<graphics::Camera> m_camera;
     std::unique_ptr<graphics::RenderManager> m_renderManager;

@@ -9,6 +9,7 @@ layout(std140) uniform BuildIns
     mat4 projMat;
     mat4 viewMat;
 	mat4 normalMat;
+	vec4 viewportSize;
 };
 
 out vec4 colour;

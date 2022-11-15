@@ -32,6 +32,8 @@ public:
     virtual void onMouseMove(const MouseEventData&& eventData);
     virtual void onMouseWheel(const MouseEventData&& eventData);
 
+    virtual void onWindowResize(int width, int height);
+
 private:
 };
 
